@@ -1,13 +1,15 @@
 <script lang="ts">
-	import type { Customer } from '$lib/server/db';
-	import { runQuery, runStorageQuery } from '$lib/sqlite/dataApi';
-	import { waitTillStroageReady } from '$lib/sqlite/initStorages';
 	import { onMount } from 'svelte';
 
+
+    	import type { Customer } from '$lib/server/db';
 	let storageReady = false;
 	let customers: Customer[] = [];
 
 	onMount(async () => {
+    const {runQuery, runStorageQuery} = await import("$lib/sqlite/dataApi")
+	const { waitTillStroageReady } = await import("$lib/sqlite/initStorages");
+
 		await waitTillStroageReady('customers_v1');
 		storageReady = true;
 		customers = (await runStorageQuery('customers_v1', {

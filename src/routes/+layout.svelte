@@ -1,12 +1,15 @@
 <script>
 	import '../app.css';
 	import SettingsModal from './SettingsModal.svelte';
-	import initWorker from '$lib/sqlite/loadWorker';
+
 	import { onMount } from 'svelte';
+  
 
 	let isOpen = false;
 
-	onMount(() => {
+	onMount(async () => {
+  	const {initWorker} = await import('$lib/sqlite/loadWorker');
+
 		initWorker();
 	});
 </script>
