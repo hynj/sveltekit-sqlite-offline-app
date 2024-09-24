@@ -1,4 +1,3 @@
-import { getOrderDetails } from '$lib/server/db';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET = (({ url }) => {
@@ -11,6 +10,6 @@ export const GET = (({ url }) => {
 		throw error(400, 'Invalid offset or limit');
 	}
 
-	const data = getOrderDetails({ offset, limit });
+	const data = {one: "one"};
 	return json(data);
 }) satisfies RequestHandler;
